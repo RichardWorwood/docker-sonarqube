@@ -30,8 +30,7 @@ RUN set -x \
     #       Key fingerprint = F118 2E81 C792 9289 21DB  CAB4 CFCA 4A29 D264 68DE
     # uid                  sonarsource_deployer (Sonarsource Deployer) <infra@sonarsource.com>
     # sub   2048R/06855C1D 2015-05-25
-    && gpg --keyserver ha.pool.sks-keyservers.net --recv-keys F1182E81C792928921DBCAB4CFCA4A29D26468DE \
-
+    && gpg --keyserver ha.pool.sks-keyservers.net --recv-keys F1182E81C792928921DBCAB4CFCA4A29D26468DE; if $? ne "0"; then; gpg --keyserver 37.191.226.104 --recv-keys F1182E81C792928921DBCAB4CFCA4A29D26468DE; elseif $? ne "0"; then; gpg --keyserver 178.32.66.144 --recv-keys F1182E81C792928921DBCAB4CFCA4A29D26468DE; elseif $? ne "0"; then; gpg --keyserver 192.146.137.11 --recv-keys F1182E81C792928921DBCAB4CFCA4A29D26468DE;  \
     && cd /opt \
     && curl -o sonarqube.zip -fSL https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-$SONAR_VERSION.zip \
     && curl -o sonarqube.zip.asc -fSL https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-$SONAR_VERSION.zip.asc \
